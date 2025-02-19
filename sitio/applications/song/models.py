@@ -9,7 +9,7 @@ def upload_to(instance, filename):
     # Crear un nuevo nombre con timestamp
     new_filename = f"{int(time.time())}_{filename}"
     # Retornar la nueva ruta en la carpeta correspondiente
-    return os.path.join(f'static/img/{model_name}/', new_filename)
+    return os.path.join(f'img/{model_name}/', new_filename)
 
 # Create your models here.
 class Artist(models.Model):

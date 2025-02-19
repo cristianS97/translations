@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,24 @@
     <title>Inicio</title>
 </head>
 <body>
+    <h2>Últimos artistas agregados</h2>
     <p>{{ artists }}</p>
     <p>{{ albums }}</p>
     <p>{{ songs }}</p>
+
+    {% for artist in artists %}
+        <p>{{ artist.name }}</p>
+        <img src="{{ artist.imagen.url }}" alt="{{ artist.name }}" />
+    {% endfor %}
+
+    {% for album in albums %}
+        <p>{{ album.name }}</p>
+        <img src="{{ album.portada.url }}" alt="{{ album.name }}" />
+    {% endfor %}
+
+    {% for song in songs %}
+        <p>{{ song.name }}</p>
+        <img src="{{ song.album.portada.url }}" alt="{{ song.name }}" />
+    {% endfor %}
 </body>
 </html>

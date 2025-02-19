@@ -8,8 +8,11 @@ class IndexView(ListView):
     context_object_name = "artists"
     template_name = "index.html"
 
+    def get_queryset(self):
+        return Artist.objects.order_by("-created")[:10]
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["albums"] = Album.objects.all()
-        context["songs"] = Song.objects.all()
+        context["albums"] = Album.objects.order_by("-created")[:10]
+        context["songs"] = Song.objects.order_by("-created")[:10]
         return context
