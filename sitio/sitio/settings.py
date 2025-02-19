@@ -89,7 +89,7 @@ DATABASES = {
         "USER": os.environ.get('POSTGRES_USER', 'postgres'),
         "PASSWORD": os.environ.get('POSTGRES_PASSWORD', 'qwerty'),
         "HOST": os.environ.get('POSTGRES_SERVER', 'postgres'),
-        "PORT": os.environ.get('POSTGRES_PORT', 5432)
+        "PORT": os.environ.get('POSTGRES_PORT', 6543)
     }
 }
 
@@ -128,7 +128,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR.joinpath("static").joinpath("files")
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR.joinpath("media")
+# MEDIA_ROOT = BASE_DIR.joinpath("media")
+MEDIA_ROOT = '/media'
 
 customColorPalette = [
     {

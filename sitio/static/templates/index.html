@@ -24,7 +24,7 @@
 
     {% for song in songs %}
         <p>{{ song.name }}</p>
-        <img src="{{ song.album.portada.url }}" alt="{{ song.name }}" />
+        <img src="{{ song.album.portada.url }}" alt="{{ song.album.name }}" />
     {% endfor %}
 </body>
 </html>

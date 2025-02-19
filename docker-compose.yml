@@ -6,7 +6,7 @@ services:
     image: postgres
     restart: always
     ports:
-      - 5432:5432
+      - 6543:5432
     networks:
       - net
     volumes:
@@ -28,6 +28,17 @@ services:
     ports:
         - 9090:8080
 
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    depends_on:
+      - postgres
+
   lyrics:
     container_name: lyrics
     build: ./sitio
@@ -43,9 +54,10 @@ services:
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: lyrics
       POSTGRES_SERVER: postgres
-      POSTGRES_PORT: 5432
+      POSTGRES_PORT: 6543
     depends_on:
       - postgres
+      # - pgadmin
       - adminer
 
 networks:
