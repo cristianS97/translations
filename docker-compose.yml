@@ -10,7 +10,7 @@ services:
     networks:
       - net
     volumes:
-      - ./postgres/dbfiles:/docker-entrypoint-initdb.d
+      - ./postgres/dbfiles/initPostgres.sql:/docker-entrypoint-initdb.d/init.sql
       - ./postgres/data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: postgres
@@ -28,7 +28,7 @@ services:
     ports:
         - 9090:8080
 
-  backend:
+  lyrics:
     container_name: lyrics
     build: ./sitio
     ports:
