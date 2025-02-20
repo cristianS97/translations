@@ -17,25 +17,18 @@ services:
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: postgres
 
-  adminer:
-    container_name: adminer
-    image: adminer
-    restart: always
-    depends_on:
-      - postgres
-    networks:
-      - net
-    ports:
-        - 9090:8080
-
   pgadmin:
     image: dpage/pgadmin4
     restart: always
     ports:
       - 8080:80
+    networks:
+      - net
     environment:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
+    volumes:
+      - ./postgres/pgadmin:/var/lib/pgadmin
     depends_on:
       - postgres
 
@@ -54,11 +47,11 @@ services:
       POSTGRES_PASSWORD: qwerty
       POSTGRES_DB: lyrics
       POSTGRES_SERVER: postgres
-      POSTGRES_PORT: 6543
+      POSTGRES_PORT: 5432
     depends_on:
       - postgres
-      # - pgadmin
-      - adminer
+      - pgadmin
+      # - adminer
 
 networks:
   net:
