@@ -39,7 +39,7 @@ services:
       - 8000:8000
     volumes:
       - ./sitio:/app
-      - ./media:/app/media
+      - ./media:/app/media:rw
     networks:
       - net
     environment:
@@ -51,7 +51,6 @@ services:
     depends_on:
       - postgres
       - pgadmin
-      # - adminer
 
 networks:
   net:

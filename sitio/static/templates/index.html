@@ -14,17 +14,17 @@
 
     {% for artist in artists %}
         <p>{{ artist.name }}</p>
-        <img src="{{ artist.imagen.url }}" alt="{{ artist.name }}" />
+        <img src="{{ artist.imagen_base64 }}" alt="{{ artist.name }}" />
     {% endfor %}
 
     {% for album in albums %}
         <p>{{ album.name }}</p>
-        <img src="{{ album.portada.url }}" alt="{{ album.name }}" />
+        <img src="{{ album.portada_base64 }}" alt="{{ album.name }}" />
     {% endfor %}
 
     {% for song in songs %}
         <p>{{ song.name }}</p>
-        <img src="{{ song.album.portada.url }}" alt="{{ song.album.name }}" />
+        <img src="{{ song.album.portada_base64 }}" alt="{{ song.album.name }}" />
     {% endfor %}
 </body>
 </html>

@@ -128,8 +128,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = BASE_DIR.joinpath("static").joinpath("files")
 MEDIA_URL = '/media/'
-# MEDIA_ROOT = BASE_DIR.joinpath("media")
-MEDIA_ROOT = '/media'
+MEDIA_ROOT = BASE_DIR.joinpath("media")
+# MEDIA_ROOT = '/media'
 
 customColorPalette = [
     {
