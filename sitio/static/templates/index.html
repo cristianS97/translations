@@ -1,30 +1,52 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
-</head>
-<body>
-    <h2>Últimos artistas agregados</h2>
-    <p>{{ artists }}</p>
-    <p>{{ albums }}</p>
-    <p>{{ songs }}</p>
-
-    {% for artist in artists %}
-        <p>{{ artist.name }}</p>
-        <img src="{{ artist.imagen_base64 }}" alt="{{ artist.name }}" />
-    {% endfor %}
-
-    {% for album in albums %}
-        <p>{{ album.name }}</p>
-        <img src="{{ album.portada_base64 }}" alt="{{ album.name }}" />
-    {% endfor %}
-
-    {% for song in songs %}
-        <p>{{ song.name }}</p>
-        <img src="{{ song.album.portada_base64 }}" alt="{{ song.album.name }}" />
-    {% endfor %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block pagetitle %}Inicio{% endblock pagetitle %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center m-3">Canciones y sus traducciones</h1>
+        <div class="row">
+            <h2 class="mb-2">Últimos artistas agregados</h2>
+            {% for artist in artists %}
+                <div class="col-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ artist.imagen_base64 }}" class="card-img-top" alt="{{ artist.name }}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ artist.name }}</h5>
+                        <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <h2 class="mb-2">Últimos albums agregados</h2>
+            {% for album in albums %}
+                <div class="col-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ album.portada_base64 }}" class="card-img-top" alt="{{ album.name }}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ album.name }}</h5>
+                        <p class="card-text">{{ album.name }} perteneciente a {{ album.artist.name }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
+            <h2 class="mb-2">Últimas canciones agregadas</h2>
+            {% for song in songs %}
+                <div class="col-3 mb-3">
+                    <div class="card" style="width: 18rem;">
+                        <img src="{{ song.album.portada_base64 }}" class="card-img-top" alt="{{ song.album.name }}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{ song.name }}</h5>
+                        <p class="card-text">{{ song.name }} perteneciente a {{ song.album.artist.name }}</p>
+                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock content %}

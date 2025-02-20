@@ -1,0 +1,10 @@
+.ck.ck-editor {
+    color: black !important;
+}
+.ck p,
+ .ck h1,
+  .ck h2,
+   .ck h3,
+    .ck ul {
+    color: black !important;
+}
