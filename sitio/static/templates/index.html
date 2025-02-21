@@ -42,7 +42,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{ song.name }}</h5>
                         <p class="card-text">{{ song.name }} perteneciente a {{ song.album.artist.name }}</p>
-                        <a href="#" class="btn btn-primary">Detalle</a>
+                        <a href="{% url 'detalleSong' song.pk %}" class="btn btn-primary">Detalle</a>
                         </div>
                     </div>
                 </div>

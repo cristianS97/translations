@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Detalle {{ song.name }}{% endblock pagetitle %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center m-3">Canción: {{ song.name }}</h1>
+        {% if song.name_spanish %}
+            <h2 class="text-center m-3">{{ song.name_spanish }}</h3>
+        {% endif %}
+        <div class="row">
+            <div class="col-6">
+                <div class="row">
+                    <div class="col-6 offset-3">
+                        <a href="{% url 'detalleAlbum' song.album.pk %}">
+                            <figure class="figure">
+                                <img src="{{ song.album.portada_base64 }}" class="figure-img img-fluid" alt="{{ song.album.name }}">
+                                <figcaption class="figure-caption">{{ song.album.name }} ({{ song.album.release_date.year }})</figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <ul>
+                    {% for artist in song.artists.all %}
+                        <li>
+                            <a class="link-opacity-75-hover link-underline link-underline-opacity-0" href="{% url 'detalleArtista' artist.pk %}">
+                                <img src="{{ artist.imagen_base64 }}" class="img-fluid" alt="{{ artist.name }}" style="max-width:100px" />
+                                {{ artist.name }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        {% if song.video %}
+            <iframe
+                width="560" height="315" 
+                src="https://www.youtube.com/embed/{{ song.video|cut:'https://www.youtube.com/watch?v='|cut:'https://youtu.be/' }}" 
+                title="{{ song.name }}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen
+            >
+            </iframe>
+        {% endif %}
+        <h3 class="text-center">Letras</h3>
+        <div class="row">
+            <div class="col-6">{{ song.lyrics_original|safe }}</div>
+            <div class="col-6">{{ song.lyrics_spanish|safe }}</div>
+        </div>
+    </div>
+{% endblock content %}

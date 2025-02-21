@@ -9,9 +9,14 @@
                     <img src="{{ album.portada_base64 }}" class="card-img-top" alt="{{ album.name }}">
                     <div class="card-body">
                         <h5 class="card-title">{{ album.name }}</h5>
-                        <p class="card-text">{{ album.artist.name }}</p>
+                        <p class="card-text">
+                            <a class="link-opacity-75-hover link-underline link-underline-opacity-0" href="{% url 'detalleArtista' album.artist.pk %}">
+                                <img src="{{ album.artist.imagen_base64 }}" class="img-fluid" alt="{{ album.artist.name }}" style="max-width:100px" />
+                                {{ album.artist.name }}
+                            </a>
+                        </p>
                         <p class="card-text">Lanzamiento: {{ album.release_date }}</p>
-                        <p class="card-text">{{ song|length }} canciones</p>
+                        <p class="card-text">{{ songs|length }} canciones</p>
                     </div>
                 </div>
             </div>
@@ -22,7 +27,11 @@
                     <div class="col-6">
                         <ul>
                             {% for song in songs %}
-                                <li><a href="#">{{ song.name }}</a></li>
+                                <li>
+                                    <a class="link-opacity-75-hover link-underline link-underline-opacity-0" href="{% url 'detalleSong' song.pk %}">
+                                        {{ song.name }}
+                                    </a>
+                                </li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -46,3 +46,8 @@ class AlbumDetail(DetailView):
         album = self.get_object()
         context["songs"] = Song.objects.filter(album=album)
         return context
+
+class SongDetail(DetailView):
+    model = Song
+    context_object_name = "song"
+    template_name = "song.html"

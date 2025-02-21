@@ -30,7 +30,7 @@
             <div class="row">
                 {% for album in albums %}
                     <div class="col-3">
-                        <a href="{% url 'detalleAlbum' album.pk %}">
+                        <a cla href="{% url 'detalleAlbum' album.pk %}">
                             <figure class="figure">
                                 <img src="{{ album.portada_base64 }}" class="figure-img img-fluid" alt="{{ album.name }}">
                                 <figcaption class="figure-caption">{{ album.name }} ({{ album.release_date.year }})</figcaption>
