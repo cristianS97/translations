@@ -27,7 +27,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{ album.name }}</h5>
                         <p class="card-text">{{ album.name }} perteneciente a {{ album.artist.name }}</p>
-                        <a href="#" class="btn btn-primary">Detalle</a>
+                        <a href="{% url 'detalleAlbum' album.pk %}" class="btn btn-primary">Detalle</a>
                         </div>
                     </div>
                 </div>

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Detalle {{ album.name }}{% endblock pagetitle %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center m-3">Album</h1>
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <img src="{{ album.portada_base64 }}" class="card-img-top" alt="{{ album.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ album.name }}</h5>
+                        <p class="card-text">{{ album.artist.name }}</p>
+                        <p class="card-text">Lanzamiento: {{ album.release_date }}</p>
+                        <p class="card-text">{{ song|length }} canciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <h3 class="text-center">Canciones</h3>
+                <div class="row">
+                    <div class="col-6">
+                        <ul>
+                            {% for song in songs %}
+                                <li><a href="#">{{ song.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+{% endblock content %}

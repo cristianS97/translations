@@ -35,3 +35,14 @@ class ArtistDetail(DetailView):
         context["age"] = age
         context["albums"] = Album.objects.filter(artist=artist)
         return context
+
+class AlbumDetail(DetailView):
+    model = Album
+    context_object_name = "album"
+    template_name = "album.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        album = self.get_object()
+        context["songs"] = Song.objects.filter(album=album)
+        return context
