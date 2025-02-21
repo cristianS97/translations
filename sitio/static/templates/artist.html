@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block pagetitle %}Detalle {{ artist.name }}{% endblock pagetitle %}
+{% block content %}
+    <div class="container">
+        <h1 class="text-center m-3">Artista</h1>
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="card">
+                    <img src="{{ artist.imagen_base64 }}" class="card-img-top" alt="{{ artist.name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ artist.name }}</h5>
+                        <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}, {{ artist.pais }}</p>
+                        <p class="card-text">Fecha de nacimiento: {{ artist.nacimiento }} ({{ age }} años)</p>
+                        {% if albums|length == 1 %}
+                            <p class="card-text">{{ albums|length }} álbum registrado</p>
+                        {% else %}
+                            <p class="card-text">{{ albums|length }} álbumes registrados</p>
+                        {% endif %}
+                        {% if songs|length == 1 %}
+                            <p class="card-text">{{ songs|length }} canción registrada</p>
+                        {% else %}
+                            <p class="card-text">{{ songs|length }} canciones registradas</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-5">
+            <h3 class="text-center">Álbums</h3>
+            <div class="col-6">
+                <div class="row">
+                    {% for album in albums %}
+                        <div class="col-6">
+                            <a href="#">
+                                <figure class="figure">
+                                    <img src="{{ album.portada_base64 }}" class="figure-img img-fluid" alt="{{ album.name }}">
+                                    <figcaption class="figure-caption">{{ album.name }} ({{ album.release_date.year }})</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="col-6"></div>
+        </div>
+    </div>
+{% endblock content %}

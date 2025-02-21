@@ -42,12 +42,23 @@ class AlbumAdmin(admin.ModelAdmin):
 class SongAdmin(admin.ModelAdmin):
     list_display = ('name', 'album', 'get_artist_name')
     search_fields = ('name', 'album__name', 'album__artist__name')
-    fields = ('name', 'name_spanish', 'album', 'lyrics_original', 'lyrics_spanish', 'artists', 'video')
+    # fields = ('name', 'name_spanish', 'album', 'lyrics_original', 'lyrics_spanish', 'artists', 'video')
     readonly_fields = ('created', 'updated')
+
+    fieldsets = (
+        ("Información General", {
+            "fields": ("name", "name_spanish", "album", "artists", "video"),
+        }),
+        ("Letras", {
+            "fields": (("lyrics_original", "lyrics_spanish"),),  # Campos en la misma línea
+        }),
+    )
 
     def get_artist_name(self, obj):
         return obj.album.artist.name
+    get_artist_name.short_description = "Artista"
 
+# Registro en administración
 admin.site.register(Artist, ArtistAdmin)
 admin.site.register(Album, AlbumAdmin)
 admin.site.register(Song, SongAdmin)

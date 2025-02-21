@@ -10,16 +10,16 @@
                     <div class="card" style="width: 18rem;">
                         <img src="{{ artist.imagen_base64 }}" class="card-img-top" alt="{{ artist.name }}">
                         <div class="card-body">
-                        <h5 class="card-title">{{ artist.name }}</h5>
-                        <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                            <h5 class="card-title">{{ artist.name }}</h5>
+                            <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}</p>
+                            <a href="{% url 'detalleArtista' artist.pk %}" class="btn btn-primary">Detalle</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
         <div class="row">
-            <h2 class="mb-2">Últimos albums agregados</h2>
+            <h2 class="mb-2">Últimos álbums agregados</h2>
             {% for album in albums %}
                 <div class="col-3 mb-3">
                     <div class="card" style="width: 18rem;">
@@ -27,7 +27,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{ album.name }}</h5>
                         <p class="card-text">{{ album.name }} perteneciente a {{ album.artist.name }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Detalle</a>
                         </div>
                     </div>
                 </div>
@@ -42,7 +42,7 @@
                         <div class="card-body">
                         <h5 class="card-title">{{ song.name }}</h5>
                         <p class="card-text">{{ song.name }} perteneciente a {{ song.album.artist.name }}</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <a href="#" class="btn btn-primary">Detalle</a>
                         </div>
                     </div>
                 </div>
