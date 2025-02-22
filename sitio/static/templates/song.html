@@ -22,7 +22,7 @@
             <div class="col-6">
                 <ul>
                     {% for artist in song.artists.all %}
-                        <li>
+                        <li class="mb-2">
                             <a class="link-opacity-75-hover link-underline link-underline-opacity-0" href="{% url 'detalleArtista' artist.pk %}">
                                 <img src="{{ artist.imagen_base64 }}" class="img-fluid" alt="{{ artist.name }}" style="max-width:100px" />
                                 {{ artist.name }}
@@ -51,8 +51,14 @@
         {% endif %}
         <h3 class="text-center">Letras</h3>
         <div class="row">
-            <div class="col-6">{{ song.lyrics_original|safe }}</div>
-            <div class="col-6">{{ song.lyrics_spanish|safe }}</div>
+            <div class="col-6">
+                <h4 class="text-center">{{ song.name }}</h4>
+                {{ song.lyrics_original|safe }}
+            </div>
+            <div class="col-6">
+                <h4 class="text-center">{{ song.name_spanish }}</h4>
+                {{ song.lyrics_spanish|safe }}
+            </div>
         </div>
     </div>
 {% endblock content %}
