@@ -4,8 +4,6 @@ import os
 import time
 import base64
 from io import BytesIO
-from django.core.files.base import ContentFile
-from django.core.exceptions import ValidationError
 from PIL import Image
 
 def upload_to(instance, filename):
