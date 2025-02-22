@@ -33,16 +33,21 @@
             </div>
         </div>
         {% if song.video %}
-            <iframe
-                width="560" height="315" 
-                src="https://www.youtube.com/embed/{{ song.video|cut:'https://www.youtube.com/watch?v='|cut:'https://youtu.be/' }}" 
-                title="{{ song.name }}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-            >
-            </iframe>
+            <div class="row">
+                <div class="col-8 offset-2">
+                    <iframe
+                        id="videoIframe"
+                        src="https://www.youtube.com/embed/{{ song.video|cut:'https://www.youtube.com/watch?v='|cut:'https://youtu.be/' }}" 
+                        title="{{ song.name }}"
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen
+                        style="width:100%"
+                    >
+                    </iframe>
+                </div>
+            </div>
         {% endif %}
         <h3 class="text-center">Letras</h3>
         <div class="row">
@@ -51,3 +56,13 @@
         </div>
     </div>
 {% endblock content %}
+{% block script %}
+    <script>
+        window.onload = function() {
+            var iframe = document.getElementById('videoIframe');
+            var iframeWidth = iframe.offsetWidth;
+            var aspectRatio = 9 / 16; // Relación de aspecto de YouTube
+            iframe.style.height = (iframeWidth * aspectRatio) + 'px';
+        }
+    </script>
+{% endblock script %}
