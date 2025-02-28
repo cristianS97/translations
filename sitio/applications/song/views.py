@@ -34,6 +34,8 @@ class ArtistDetail(DetailView):
 
         context["age"] = age
         context["albums"] = Album.objects.filter(artist=artist)
+        # Obtener los álbumes en los que el artista ha colaborado a través de canciones
+        context["collaborated_albums"] = Album.objects.filter(song__artists=artist).exclude(artist=artist).distinct()
         return context
 
 class AlbumDetail(DetailView):
@@ -45,6 +47,8 @@ class AlbumDetail(DetailView):
         context = super().get_context_data(**kwargs)
         album = self.get_object()
         context["songs"] = Song.objects.filter(album=album)
+        # Obtener todos los artistas que han participado en alguna canción del álbum
+        context["artists"] = Artist.objects.filter(song__album=album).exclude(id=album.artist.id).distinct()
         return context
 
 class SongDetail(DetailView):

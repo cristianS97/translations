@@ -25,20 +25,39 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-5">
-            <h3 class="text-center">Álbums</h3>
-            <div class="row">
-                {% for album in albums %}
-                    <div class="col-3">
-                        <a cla href="{% url 'detalleAlbum' album.pk %}">
-                            <figure class="figure">
-                                <img src="{{ album.portada_base64 }}" class="figure-img img-fluid" alt="{{ album.name }}">
-                                <figcaption class="figure-caption">{{ album.name }} ({{ album.release_date.year }})</figcaption>
-                            </figure>
-                        </a>
-                    </div>
-                {% endfor %}
+        {% if albums|length > 0 %}
+            <div class="row mt-5">
+                <h3 class="text-center">Álbums</h3>
+                <div class="row">
+                    {% for album in albums %}
+                        <div class="col-3">
+                            <a cla href="{% url 'detalleAlbum' album.pk %}">
+                                <figure class="figure">
+                                    <img src="{{ album.portada_base64 }}" class="figure-img img-fluid" alt="{{ album.name }}">
+                                    <figcaption class="figure-caption">{{ album.name }} ({{ album.release_date.year }})</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
-        </div>
+        {% endif %}
+        {% if collaborated_albums|length > 0 %}
+            <div class="row mt-5">
+                <h3 class="text-center">Álbums en los que colabora</h3>
+                <div class="row">
+                    {% for album in collaborated_albums %}
+                        <div class="col-3">
+                            <a cla href="{% url 'detalleAlbum' album.pk %}">
+                                <figure class="figure">
+                                    <img src="{{ album.portada_base64 }}" class="figure-img img-fluid" alt="{{ album.name }}">
+                                    <figcaption class="figure-caption">{{ album.name }} ({{ album.release_date.year }})</figcaption>
+                                </figure>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock content %}

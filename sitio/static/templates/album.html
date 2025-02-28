@@ -22,9 +22,10 @@
             </div>
         </div>
         <div class="row mt-5">
-            <h3 class="text-center">Canciones</h3>
+            <h3 class="text-center">Detalles</h3>
                 <div class="row">
                     <div class="col-6">
+                        <h4>Canciones</h4>
                         <ul>
                             {% for song in songs %}
                                 <li>
@@ -35,6 +36,21 @@
                             {% endfor %}
                         </ul>
                     </div>
+                    {% if artists|length > 0 %}
+                        <div class="col-6">
+                            <h4>Artistas que participan en el album</h4>
+                            <ul>
+                                {% for artist in artists %}
+                                    <li class="mb-2">
+                                        <a class="link-opacity-75-hover link-underline link-underline-opacity-0" href="{% url 'detalleArtista' artist.pk %}">
+                                            <img src="{{ artist.imagen_base64 }}" class="img-fluid" alt="{{ artist.name }}" style="max-width:100px" />
+                                            {{ artist.name }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
         </div>
     </div>
