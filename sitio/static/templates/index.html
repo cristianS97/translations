@@ -8,7 +8,7 @@
             {% for artist in artists %}
                 <div class="col-3 mb-3">
                     <div class="card" style="width: 18rem;">
-                        <img src="{{ artist.imagen_base64 }}" class="card-img-top" alt="{{ artist.name }}">
+                        <img src="{{ artist.imagen_base64 }}" class="card-img-top" alt="{{ artist.name }}" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">{{ artist.name }}</h5>
                             <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}</p>

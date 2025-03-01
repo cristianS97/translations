@@ -2,6 +2,21 @@ from django.contrib import admin
 from django.utils.html import format_html
 from .models import Artist, Song, Album
 
+class AlbumFilter(admin.SimpleListFilter):
+    title = "Álbum"  # Nombre que aparecerá en la barra lateral
+    parameter_name = "album"  # Nombre del parámetro en la URL
+
+    def lookups(self, request, model_admin):
+        """Retorna una lista de álbumes disponibles para filtrar."""
+        albums = Album.objects.all().values_list("id", "name")
+        return [(album[0], album[1]) for album in albums]
+
+    def queryset(self, request, queryset):
+        """Filtra las canciones según el álbum seleccionado."""
+        if self.value():
+            return queryset.filter(album_id=self.value())
+        return queryset
+
 # Register your models here.
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('name', 'real_name', 'nacimiento', 'ciudad', 'pais')
@@ -44,6 +59,7 @@ class SongAdmin(admin.ModelAdmin):
     search_fields = ('name', 'album__name', 'album__artist__name')
     # fields = ('name', 'name_spanish', 'album', 'lyrics_original', 'lyrics_spanish', 'artists', 'video')
     readonly_fields = ('created', 'updated')
+    list_filter = ('artists', AlbumFilter)
 
     fieldsets = (
         ("Información General", {

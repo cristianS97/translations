@@ -11,15 +11,15 @@
                         <h5 class="card-title">{{ artist.name }}</h5>
                         <p class="card-text">{{ artist.real_name }} nacido en {{ artist.ciudad }}, {{ artist.pais }}</p>
                         <p class="card-text">Fecha de nacimiento: {{ artist.nacimiento }} ({{ age }} años)</p>
-                        {% if albums|length == 1 %}
-                            <p class="card-text">{{ albums|length }} álbum registrado</p>
+                        {% if total_albums == 1 %}
+                            <p class="card-text">{{ total_albums }} álbum registrado</p>
                         {% else %}
-                            <p class="card-text">{{ albums|length }} álbumes registrados</p>
+                            <p class="card-text">{{ total_albums }} álbumes registrados</p>
                         {% endif %}
-                        {% if songs|length == 1 %}
-                            <p class="card-text">{{ songs|length }} canción registrada</p>
+                        {% if total_songs == 1 %}
+                            <p class="card-text">{{ total_songs }} canción registrada</p>
                         {% else %}
-                            <p class="card-text">{{ songs|length }} canciones registradas</p>
+                            <p class="card-text">{{ total_songs }} canciones registradas</p>
                         {% endif %}
                     </div>
                 </div>
@@ -27,7 +27,7 @@
         </div>
         {% if albums|length > 0 %}
             <div class="row mt-5">
-                <h3 class="text-center">Álbums</h3>
+                <h3 class="text-center">Álbums ({{ albums|length }})</h3>
                 <div class="row">
                     {% for album in albums %}
                         <div class="col-3">
@@ -44,7 +44,7 @@
         {% endif %}
         {% if collaborated_albums|length > 0 %}
             <div class="row mt-5">
-                <h3 class="text-center">Álbums en los que colabora</h3>
+                <h3 class="text-center">Álbums en los que colabora ({{ collaborated_albums|length }})</h3>
                 <div class="row">
                     {% for album in collaborated_albums %}
                         <div class="col-3">

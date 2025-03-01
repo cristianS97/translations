@@ -36,6 +36,8 @@ class ArtistDetail(DetailView):
         context["albums"] = Album.objects.filter(artist=artist)
         # Obtener los álbumes en los que el artista ha colaborado a través de canciones
         context["collaborated_albums"] = Album.objects.filter(song__artists=artist).exclude(artist=artist).distinct()
+        context["total_albums"] = Album.objects.filter(song__artists=artist).distinct().count()
+        context["total_songs"] = Song.objects.filter(artists=artist).distinct().count()
         return context
 
 class AlbumDetail(DetailView):
