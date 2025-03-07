@@ -51,13 +51,13 @@
         {% endif %}
         <h3 class="text-center">Letras</h3>
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 p-3 lyrics-container" id="lyrics-original" style="background-color: #f8f9fa; border-radius: 10px; overflow-y: auto; max-height: 400px;">
                 <h4 class="text-center">{{ song.name }}</h4>
-                {{ song.lyrics_original|safe }}
+                <pre style="white-space: pre-wrap; font-size: 12px; line-height: 1.5;">{{ song.lyrics_original|safe }}</pre>
             </div>
-            <div class="col-6">
+            <div class="col-6 p-3 lyrics-container" id="lyrics-spanish" style="background-color: #e9ecef; border-radius: 10px; overflow-y: auto; max-height: 400px;">
                 <h4 class="text-center">{{ song.name_spanish }}</h4>
-                {{ song.lyrics_spanish|safe }}
+                <pre style="white-space: pre-wrap; font-size: 12px; line-height: 1.5;">{{ song.lyrics_spanish|safe }}</pre>
             </div>
         </div>
     </div>
@@ -70,5 +70,18 @@
             var aspectRatio = 9 / 16; // Relación de aspecto de YouTube
             iframe.style.height = (iframeWidth * aspectRatio) + 'px';
         }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            let original = document.getElementById("lyrics-original");
+            let translated = document.getElementById("lyrics-spanish");
+
+            function syncScroll(event) {
+                let other = event.target.id === "lyrics-original" ? translated : original;
+                other.scrollTop = event.target.scrollTop;
+            }
+
+            original.addEventListener("scroll", syncScroll);
+            translated.addEventListener("scroll", syncScroll);
+        });
     </script>
 {% endblock script %}

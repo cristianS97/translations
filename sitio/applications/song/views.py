@@ -57,3 +57,14 @@ class SongDetail(DetailView):
     model = Song
     context_object_name = "song"
     template_name = "song.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        song = self.get_object()
+
+        # Dividimos las letras en líneas numeradas
+        context["lyrics_original"] = list(enumerate(song.lyrics_original.split("\n"), start=1))
+        context["lyrics_spanish"] = list(enumerate(song.lyrics_spanish.split("\n"), start=1))
+
+        return context
+
