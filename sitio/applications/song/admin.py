@@ -20,6 +20,7 @@ class AlbumFilter(admin.SimpleListFilter):
 # Register your models here.
 class ArtistAdmin(admin.ModelAdmin):
     list_display = ('name', 'real_name', 'nacimiento', 'ciudad', 'pais')
+    list_display_links = ('name', 'real_name', 'nacimiento', 'ciudad', 'pais')
     search_fields = ('name', 'real_name')
     fields = ('name', 'real_name', 'nacimiento', 'ciudad', 'pais', 'imagen', 'image_preview')
     readonly_fields = ('created', 'updated', 'image_preview')
@@ -38,6 +39,7 @@ class ArtistAdmin(admin.ModelAdmin):
 
 class AlbumAdmin(admin.ModelAdmin):
     list_display = ('name', 'artist', 'release_date', 'portada')
+    list_display_links = ('name', 'artist', 'release_date', 'portada')
     search_fields = ('name', 'artist__name')
     fields = ('name', 'artist', 'release_date', 'portada', 'image_preview')
     readonly_fields = ('created', 'updated', 'image_preview')
@@ -55,7 +57,8 @@ class AlbumAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 
 class SongAdmin(admin.ModelAdmin):
-    list_display = ('name', 'album', 'get_artist_name')
+    list_display = ('track_number', 'name', 'album', 'get_artist_name')
+    list_display_links = ('track_number', 'name', 'album', 'get_artist_name')
     search_fields = ('name', 'album__name', 'album__artist__name')
     # fields = ('name', 'name_spanish', 'album', 'lyrics_original', 'lyrics_spanish', 'artists', 'video')
     readonly_fields = ('created', 'updated')
@@ -63,7 +66,7 @@ class SongAdmin(admin.ModelAdmin):
 
     fieldsets = (
         ("Información General", {
-            "fields": ("name", "name_spanish", "album", "artists", "video"),
+            "fields": ("name", "name_spanish", "album", "track_number", "artists", "video"),
         }),
         ("Letras", {
             "fields": (("lyrics_original", "lyrics_spanish"),),  # Campos en la misma línea

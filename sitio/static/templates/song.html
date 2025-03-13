@@ -2,7 +2,7 @@
 {% block pagetitle %}Detalle {{ song.name }}{% endblock pagetitle %}
 {% block content %}
     <div class="container">
-        <h1 class="text-center m-3">Canción: {{ song.name }}</h1>
+        <h1 class="text-center m-3">Canción: {{ song.name }} <a class="btn btn-sm btn-success" href="{% url 'admin:song_song_change' song.id %}">Editar</a></h1>
         {% if song.name_spanish %}
             <h2 class="text-center m-3">{{ song.name_spanish }}</h3>
         {% endif %}

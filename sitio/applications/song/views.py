@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db import models
 from .models import Artist, Album, Song
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -48,7 +49,17 @@ class AlbumDetail(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         album = self.get_object()
-        context["songs"] = Song.objects.filter(album=album)
+        # context["songs"] = Song.objects.filter(album=album).order_by("track_number")
+        # Ordenar primero por track_number si no es NULL, y si es NULL, ordenar por nombre
+        context["songs"] = Song.objects.filter(album=album).order_by(
+            models.Case(
+                models.When(track_number__isnull=True, then=models.Value(1)),
+                default=models.Value(0),
+                output_field=models.IntegerField(),
+            ),
+            "track_number",
+            "name",
+        )
         # Obtener todos los artistas que han participado en alguna canción del álbum
         context["artists"] = Artist.objects.filter(song__album=album).exclude(id=album.artist.id).distinct()
         return context

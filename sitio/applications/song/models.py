@@ -81,6 +81,7 @@ class Song(models.Model):
     name = models.CharField(max_length=50, verbose_name="Nombre")
     name_spanish = models.CharField(max_length=50, verbose_name="Nombre español", null=True, blank=True)
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    track_number = models.IntegerField(verbose_name="Posición álbum", null=True, blank=True)
     lyrics_original = CKEditor5Field(verbose_name="Letra original", config_name='extends')
     lyrics_spanish = CKEditor5Field(verbose_name="Letra español", config_name='extends', null=True, blank=True)
     artists = models.ManyToManyField(Artist, verbose_name="Artistas")
