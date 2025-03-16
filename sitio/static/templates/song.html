@@ -62,26 +62,3 @@
         </div>
     </div>
 {% endblock content %}
-{% block script %}
-    <script>
-        window.onload = function() {
-            var iframe = document.getElementById('videoIframe');
-            var iframeWidth = iframe.offsetWidth;
-            var aspectRatio = 9 / 16; // Relación de aspecto de YouTube
-            iframe.style.height = (iframeWidth * aspectRatio) + 'px';
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            let original = document.getElementById("lyrics-original");
-            let translated = document.getElementById("lyrics-spanish");
-
-            function syncScroll(event) {
-                let other = event.target.id === "lyrics-original" ? translated : original;
-                other.scrollTop = event.target.scrollTop;
-            }
-
-            original.addEventListener("scroll", syncScroll);
-            translated.addEventListener("scroll", syncScroll);
-        });
-    </script>
-{% endblock script %}

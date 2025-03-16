@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db import models
+from django.http import JsonResponse
 from .models import Artist, Album, Song
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -84,4 +85,13 @@ class SongDetail(DetailView):
         context["lyrics_spanish"] = list(enumerate(song.lyrics_spanish.split("\n"), start=1))
 
         return context
+
+class SearchSongsView(ListView):
+    model = Song
+
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get("q", "")
+        songs = self.model.objects.filter(name__icontains=query)[:10]
+        results = [{"id": s.id, "name": s.name} for s in songs]
+        return JsonResponse(results, safe=False)
 

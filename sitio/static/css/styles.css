@@ -1,0 +1,16 @@
+#resultados {
+    top: 100%; /* Aparece justo debajo del input */
+    left: 0;
+    z-index: 1000;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+}
+#resultados li {
+    padding: 5px;
+    list-style: none;
+    cursor: pointer;
+}
+#resultados li:hover {
+    background-color: #f8f9fa;
+}

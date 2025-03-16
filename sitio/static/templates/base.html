@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block pagetitle %}{% endblock pagetitle %}</title>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -21,6 +22,12 @@
                     </li>
                 </ul>
             </div>
+            <form class="form-inline my-2 my-lg-0">
+                <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+                <input type="text" id="buscar" class="form-control" placeholder="Buscar canción...">
+                <ul id="resultados" class="list-group position-absolute bg-white w-100 shadow-sm" style="max-height: 200px; overflow-y: auto; display: none;"></ul>
+            </form>
         </div>
     </nav>
     {% block content %}{% endblock %}
@@ -32,6 +39,37 @@
         </div>
     </footer>
 </body>
-<script src="{% static 'js/bootstrap.bundle.min.css' %}"></script>
+<script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+<script>
+    document.getElementById("buscar").addEventListener("input", function() {
+        let query = this.value;
+        let lista = document.getElementById("resultados");
+        if (query.length === 0) {
+            lista.innerHTML = "";
+            lista.style.display = "none";
+            return;
+        }
+        fetch(`/search/?q=${query}`)
+        .then(response => response.json())
+        .then(data => {
+            lista.innerHTML = "";
+            if (data.length > 0) {
+                lista.style.display = "block";  // Muestra la lista cuando hay resultados
+                data.forEach(cancion => {
+                    let li = document.createElement("li");
+                    li.classList.add("list-group-item");
+                    let a = document.createElement("a");
+                    a.href = "{% url 'detalleSong' 0 %}".replace("0", cancion.id);
+                    a.textContent = cancion.name;
+                    li.appendChild(a);
+                    lista.appendChild(li);
+                });
+            } else {
+                lista.style.display = "none";  // Oculta la lista si no hay resultados
+            }
+        });
+    });
+</script>
 {% block script %}{% endblock script %}
 </html>
