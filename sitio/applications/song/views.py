@@ -12,12 +12,18 @@ class IndexView(ListView):
     template_name = "index.html"
 
     def get_queryset(self):
-        return Artist.objects.order_by("-created")[:10]
+        return Artist.objects.order_by("-created")[:4]
 
     def get_context_data(self, **kwargs):
+        albums = Album.objects.order_by("-created")
+        songs = Song.objects.order_by("-created")
+        artists = Artist.objects.all()
         context = super().get_context_data(**kwargs)
-        context["albums"] = Album.objects.order_by("-created")[:10]
-        context["songs"] = Song.objects.order_by("-created")[:10]
+        context["albums"] = albums[:4]
+        context["songs"] = songs[:4]
+        context["total_artists"] = len(artists)
+        context["total_albums"] = len(albums)
+        context["total_songs"] = len(songs)
         return context
 
 class ArtistDetail(DetailView):
